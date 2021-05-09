@@ -1,7 +1,10 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import torch
 from PIL import Image
 from torchvision import transforms
+
+image_path = "images/barbara.png"
 
 
 def image2tensor(image_path):
@@ -18,4 +21,6 @@ def image2tensor_norm(image_path):
 
 
 def corrupt_gaussian(tensor):
-    pass
+    noise = torch.randn(tensor.size())
+    corrupted_tensor = tensor + noise
+    return corrupted_tensor
