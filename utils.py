@@ -20,7 +20,13 @@ def image2tensor_norm(image_path):
     return tensor
 
 
-def corrupt_gaussian(tensor):
-    noise = torch.randn(tensor.size())
+def corrupt_gaussian(tensor, std=1):
+    noise = torch.randn(tensor.size()) * std**0.5
     corrupted_tensor = tensor + noise
     return corrupted_tensor
+
+
+def show_image(tensor):
+    plt.figure()
+    plt.imshow(tensor.numpy().transpose(1, 2, 0), cmap='gray')
+    plt.show()
