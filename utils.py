@@ -11,5 +11,11 @@ def image2tensor(image_path):
     return tensor
 
 
+def image2tensor_norm(image_path):
+    im = Image.open(image_path)
+    tensor = transforms.ToTensor()(im)
+    return tensor
+
+
 def corrupt_gaussian(tensor):
     pass
