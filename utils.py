@@ -65,3 +65,8 @@ def transform_image_function(image_size, num_channels):
     ]
     transform = transforms.Compose(list_of_transforms)
     return transform
+
+
+def get_device():
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    return device
