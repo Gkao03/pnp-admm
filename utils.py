@@ -97,3 +97,9 @@ def get_dataset(dataroot, image_size, num_channels):
     dataset_list = [normal_dataset, mirror_dataset, color_jitter_dataset]
     dataset = ConcatDataset(dataset_list)
     return dataset
+
+
+def get_dataloader(dataroot, image_size, num_channels, batch_size):
+    dataset = get_dataset(dataroot, image_size, num_channels)
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, drop_last=True)
+    return dataloader
