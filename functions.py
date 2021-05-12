@@ -61,7 +61,7 @@ def transform_image_function(image_size, num_channels):
         transforms.Resize(image_size),  # square resize
         transforms.CenterCrop(image_size),  # square crop
         transforms.ToTensor(),  # convert image to pytorch tensor
-        transforms.Normalize(mean=[0.5] * num_channels, std=[0.5] * num_channels)  # normalize the tensor
+        # transforms.Normalize(mean=[0.5] * num_channels, std=[0.5] * num_channels)  # change normalization
     ]
     transform = transforms.Compose(list_of_transforms)
     return transform
