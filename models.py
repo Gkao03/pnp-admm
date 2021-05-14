@@ -34,3 +34,6 @@ class DnCNN(nn.Module):
         if layer_type == 1 or layer_type == 2:
             block.add_module('relu', nn.ReLU(inplace=True))
         return block
+
+    def forward(self, x):
+        return self.main(x)
