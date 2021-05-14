@@ -6,7 +6,7 @@ import torch.nn.functional as F
 
 class DnCNN(nn.Module):
     """
-    Following Architecture:
+    Following Denoising Architecture:
     https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7839189
     """
     def __init__(self, depth):
