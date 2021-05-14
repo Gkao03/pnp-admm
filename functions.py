@@ -32,7 +32,7 @@ def corrupt_gaussian(tensor, std=1):
 
 def show_image(tensor):
     plt.figure()
-    plt.imshow(tensor.numpy().transpose(1, 2, 0), cmap='gray')
+    plt.imshow(tensor.detach().numpy().transpose(1, 2, 0), cmap='gray')
     plt.show()
 
 
