@@ -9,10 +9,10 @@ class DnCNN(nn.Module):
     Following Architecture:
     https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7839189
     """
-    def __init__(self):
+    def __init__(self, depth):
         pass
 
-    def _block(self, in_channels, out_channels, kernel_size, stride, padding, type):
+    def _block(self, in_channels, out_channels, kernel_size, stride, padding, layer_type):
         block = nn.Sequential()
         block.add_module('conv', nn.ConvTranspose2d(in_channels=in_channels,
                                                     out_channels=out_channels,
@@ -20,6 +20,8 @@ class DnCNN(nn.Module):
                                                     stride=stride,
                                                     padding=padding,
                                                     bias=False))
-        block.add_module('batchnorm', nn.BatchNorm2d(out_channels))
-        block.add_module('relu', nn.ReLU(inplace=True))
+        if layer_type == 2:
+            block.add_module('batchnorm', nn.BatchNorm2d(out_channels))
+        if layer_type == 1 or layer_type == 2:
+            block.add_module('relu', nn.ReLU(inplace=True))
         return block
