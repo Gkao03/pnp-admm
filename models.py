@@ -9,8 +9,17 @@ class DnCNN(nn.Module):
     Following Denoising Architecture:
     https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7839189
     """
-    def __init__(self, depth):
-        pass
+    def __init__(self, depth, in_channels):
+        super(DnCNN, self).__init__()
+        self.main = nn.Sequential()
+        self.main.add_module('block1', self._block(in_channels, 64, 3, 1, 1, 1))  # first layer type
+
+        for i in range(depth - 2):  # second layer type
+            block_name = 'block' + str(i + 2)
+            self.main.add_module(block_name, self._block(64, 64, 3, 1, 1, 2))
+
+        block_name = 'block' + str(depth)
+        self.main.add_module(block_name, self._block(64, in_channels, 3, 1, 1, 3))  # third layer type
 
     def _block(self, in_channels, out_channels, kernel_size, stride, padding, layer_type):
         block = nn.Sequential()
