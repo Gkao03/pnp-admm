@@ -40,4 +40,6 @@ class DnCNN(nn.Module):
 
     def avgMSELoss(self, x, y, R_y):
         batch_size = R_y.size()[0]
-        pass
+        mse = torch.square(torch.norm(R_y - (y - x)))
+        loss = (1 / (2 * batch_size)) * mse
+        return loss
