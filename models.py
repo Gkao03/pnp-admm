@@ -37,3 +37,7 @@ class DnCNN(nn.Module):
 
     def forward(self, x):
         return self.main(x)
+
+    def avgMSELoss(self, x, y, R_y):
+        batch_size = R_y.size()[0]
+        pass
