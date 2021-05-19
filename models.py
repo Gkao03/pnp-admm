@@ -21,7 +21,8 @@ class DnCNN(nn.Module):
         block_name = 'block' + str(depth)
         self.main.add_module(block_name, self._block(64, in_channels, 3, 1, 1, 3))  # third layer type
 
-    def _block(self, in_channels, out_channels, kernel_size, stride, padding, layer_type):
+    @staticmethod
+    def _block(in_channels, out_channels, kernel_size, stride, padding, layer_type):
         block = nn.Sequential()
         block.add_module('conv', nn.ConvTranspose2d(in_channels=in_channels,
                                                     out_channels=out_channels,
@@ -38,7 +39,8 @@ class DnCNN(nn.Module):
     def forward(self, x):
         return self.main(x)
 
-    def _avgMSELoss(self, x, y, R_y):
+    @staticmethod
+    def _avgMSELoss(x, y, R_y):
         batch_size = R_y.size()[0]
         mse = torch.square(torch.norm(R_y - (y - x)))
         loss = (1 / (2 * batch_size)) * mse
