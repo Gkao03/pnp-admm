@@ -38,8 +38,11 @@ class DnCNN(nn.Module):
     def forward(self, x):
         return self.main(x)
 
-    def avgMSELoss(self, x, y, R_y):
+    def _avgMSELoss(self, x, y, R_y):
         batch_size = R_y.size()[0]
         mse = torch.square(torch.norm(R_y - (y - x)))
         loss = (1 / (2 * batch_size)) * mse
         return loss
+
+    def get_lossfn(self):
+        return self._avgMSELoss()
