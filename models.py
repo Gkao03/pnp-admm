@@ -39,12 +39,12 @@ class DnCNN(nn.Module):
     def forward(self, x):
         return self.main(x)
 
-    # @staticmethod
-    # def _avgMSELoss(x, y, R_y):
-    #     batch_size = R_y.size()[0]
-    #     mse = torch.square(torch.norm(R_y - (y - x)))
-    #     loss = (1 / (2 * batch_size)) * mse
-    #     return loss
+    @staticmethod
+    def _avgMSELoss(output, label):
+        criterion = nn.MSELoss()
+        loss = criterion(output, label)
+        loss = loss * 0.5
+        return loss
 
     def get_lossfn(self):
-        return 0.5 * nn.MSELoss()
+        return self._avgMSELoss
