@@ -16,3 +16,20 @@ def train():
     net = init_model()
     loss_fn = net.get_lossfn()
     optimizer = optim.SGD(net.parameters(), lr=0.1, momentum=0.9, weight_decay=0.0001)
+
+    image_dir = "BSD"
+    image_size = 180
+    num_channels = 1
+    batch_size = 1
+    dataloader = get_dataloader(image_dir, image_size, num_channels, batch_size)
+
+    print("Starting Training...")
+
+    img_list = []
+    G_losses = []
+    D_losses = []
+    num_cycles = 0  # training cycles (iterations)
+
+    num_epochs = 50
+    for epoch in range(num_epochs):
+        pass
