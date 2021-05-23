@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import torch
 from PIL import Image
+import torchvision
 import torchvision.transforms as transforms
 import torchvision.datasets as dset
 from torch.utils.data import DataLoader, ConcatDataset
