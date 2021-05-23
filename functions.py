@@ -31,8 +31,12 @@ def corrupt_gaussian(tensor, std=1):
 
 
 def show_image(tensor):
-    plt.figure()
-    plt.imshow(tensor.detach().numpy().transpose(1, 2, 0), cmap='gray')
+    im = tensor
+    if len(tensor.size()) == 4:
+        im = torchvision.utils.make_grid(tensor)
+
+    npimg = im.numpy()
+    plt.imshow(np.transpose(npimg, (1, 2, 0)))
     plt.show()
 
 
