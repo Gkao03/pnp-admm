@@ -5,6 +5,7 @@ from PIL import Image
 import torchvision.transforms as transforms
 import torchvision.datasets as dset
 from torch.utils.data import DataLoader, ConcatDataset
+import torch.nn as nn
 import os
 import random
 
