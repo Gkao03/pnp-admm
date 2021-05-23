@@ -31,4 +31,5 @@ def train():
 
     num_epochs = 50
     for epoch in range(num_epochs):
-        pass
+        for batch_ndx, data in enumerate(dataloader, 0):
+            pass
