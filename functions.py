@@ -8,8 +8,6 @@ from torch.utils.data import DataLoader, ConcatDataset
 import os
 import random
 
-image_path = "images/barbara.png"
-
 
 def image2tensor(image_path):
     im = Image.open(image_path)
@@ -61,7 +59,6 @@ def transform_image_function(image_size, num_channels):
         transforms.Resize(image_size),  # square resize
         transforms.CenterCrop(image_size),  # square crop
         transforms.ToTensor(),  # convert image to pytorch tensor
-        # transforms.Normalize(mean=[0.5] * num_channels, std=[0.5] * num_channels)  # change normalization
     ]
     transform = transforms.Compose(list_of_transforms)
     return transform
@@ -74,28 +71,7 @@ def get_device():
 
 def get_dataset(dataroot, image_size, num_channels):
     transform = transform_image_function(image_size, num_channels)
-    normal_dataset = dset.ImageFolder(root=dataroot, transform=transform)
-    # dataset = dset.ImageFolder(root=dataroot, transform=transform)
-
-    # Augment the dataset with mirrored images
-    mirror_dataset = dset.ImageFolder(dataroot, transform=transforms.Compose([
-        transforms.Resize(image_size),
-        transforms.CenterCrop(image_size),
-        transforms.RandomHorizontalFlip(p=1.0),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.5] * num_channels, std=[0.5] * num_channels)]))
-
-    # Augment the dataset with color changes
-    color_jitter_dataset = dset.ImageFolder(dataroot, transform=transforms.Compose([
-        transforms.Resize(image_size),
-        transforms.CenterCrop(image_size),
-        transforms.ColorJitter(0.5, 0.5, 0.5),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.5] * num_channels, std=[0.5] * num_channels)]))
-
-    # Combine the datasets
-    dataset_list = [normal_dataset, mirror_dataset, color_jitter_dataset]
-    dataset = ConcatDataset(dataset_list)
+    dataset = dset.ImageFolder(root=dataroot, transform=transform)
     return dataset
 
 
