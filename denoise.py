@@ -26,8 +26,7 @@ def train():
     print("Starting Training...")
 
     img_list = []
-    G_losses = []
-    D_losses = []
+    losses = []
     num_cycles = 0  # training cycles (iterations)
 
     num_epochs = 50
