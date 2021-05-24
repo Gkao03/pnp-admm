@@ -32,4 +32,11 @@ def train():
     num_epochs = 50
     for epoch in range(num_epochs):
         for batch_ndx, data in enumerate(dataloader, 0):
+            # TODO: fix noisy, target image pair in dataloader
+            target_batch, _ = data
+            show_image(target_batch)
+            noisy_batch = corrupt_gaussian(target_batch, std=0.005)
+            show_image(noisy_batch)
+            break
             pass
+        break
