@@ -40,9 +40,9 @@ class DnCNN(nn.Module):
         return self.main(x)
 
     @staticmethod
-    def _avgMSELoss(output, label):
+    def _avgMSELoss(output, target):
         criterion = nn.MSELoss()
-        loss = criterion(output, label)
+        loss = criterion(output, target)
         loss = loss * 0.5
         return loss
 
