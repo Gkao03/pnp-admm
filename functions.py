@@ -65,7 +65,7 @@ def transform_image_function(image_size, num_channels):
         transforms.Resize(image_size),  # square resize
         transforms.CenterCrop(image_size),  # square crop
         transforms.ToTensor(),  # convert image to pytorch tensor
-        transforms.Grayscale(num_output_channels=1)
+        transforms.Grayscale(num_output_channels=num_channels)
     ]
     transform = transforms.Compose(list_of_transforms)
     return transform
