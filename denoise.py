@@ -19,7 +19,7 @@ def train():
     optimizer = optim.SGD(net.parameters(), lr=0.01, momentum=0.9, weight_decay=0.0001)
 
     image_dir = "BSD"
-    image_size = 180
+    image_size = 512
     num_channels = 1
     batch_size = 1
     dataloader = get_dataloader(image_dir, image_size, num_channels, batch_size)
