@@ -39,9 +39,9 @@ def train():
             # zero parameter gradients
             optimizer.zero_grad()
 
-            output = net(noisy_batch)
+            residual = net(noisy_batch)
 
-            loss = loss_fn(noisy_batch, noisy_batch - target_batch)
+            loss = loss_fn(residual, noisy_batch - target_batch)
             loss.backward()
             optimizer.step()
 
