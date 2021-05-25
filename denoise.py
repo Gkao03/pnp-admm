@@ -2,6 +2,7 @@ from models import *
 from functions import *
 from torchsummary import summary
 import torch.optim as optim
+import torchvision.utils as vutils
 
 
 def init_model():
@@ -32,11 +33,29 @@ def train():
     num_epochs = 50
     for epoch in range(num_epochs):
         for batch_ndx, data in enumerate(dataloader, 0):
-            # TODO: fix noisy, target image pair in dataloader
             target_batch, _ = data
-            show_image(target_batch)
             noisy_batch = corrupt_gaussian(target_batch, std=0.005)
-            show_image(noisy_batch)
-            break
-            pass
-        break
+
+            # zero parameter gradients
+            optimizer.zero_grad()
+
+            output = net(noisy_batch)
+
+            loss = loss_fn(noisy_batch, noisy_batch - target_batch)
+            loss.backward()
+            optimizer.step()
+
+            # Output training stats
+            print('[%d/%d][%d/%d]\tLoss: %.4f' % (epoch + 1, num_epochs, batch_ndx + 1, len(dataloader), loss.item()))
+
+            losses.append(loss.item())
+
+            if (num_cycles % 10 == 0) or (epoch == num_epochs - 1):
+                img_list.append(vutils.make_grid(result, padding=2, normalize=True))
+
+            num_cycles += 1
+
+    print("Finished Training")
+
+    PATH = "./pre_trained/dncnn.pth"
+    torch.save(net.state_dict(), PATH)
