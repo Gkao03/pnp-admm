@@ -24,8 +24,9 @@ def image2tensor_norm(image_path):
     return tensor
 
 
-def corrupt_gaussian(tensor, std=1):
+def corrupt_gaussian(device, tensor, std=1):
     noise = torch.randn(tensor.size()) * std**0.5
+    noise = noise.to(device)
     corrupted_tensor = tensor + noise
     return corrupted_tensor
 

@@ -35,7 +35,7 @@ def train():
         for batch_ndx, data in enumerate(dataloader, 0):
             target_batch, _ = data
             target_batch = target_batch.to(device)
-            noisy_batch = corrupt_gaussian(target_batch, std=0.005).to(device)
+            noisy_batch = corrupt_gaussian(device, target_batch, std=0.005).to(device)
 
             # zero parameter gradients
             optimizer.zero_grad()
