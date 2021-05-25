@@ -51,7 +51,7 @@ def train():
             losses.append(loss.item())
 
             if (num_cycles % 10 == 0) or (epoch == num_epochs - 1):
-                img_list.append(vutils.make_grid(result, padding=2, normalize=True))
+                img_list.append(vutils.make_grid(residual, padding=2, normalize=True))
 
             num_cycles += 1
 
