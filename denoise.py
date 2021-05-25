@@ -16,7 +16,7 @@ def train():
     device = get_device()
     net = init_model()
     loss_fn = net.get_lossfn()
-    optimizer = optim.SGD(net.parameters(), lr=0.1, momentum=0.9, weight_decay=0.0001)
+    optimizer = optim.SGD(net.parameters(), lr=0.01, momentum=0.9, weight_decay=0.0001)
 
     image_dir = "BSD"
     image_size = 180
