@@ -60,3 +60,5 @@ def train():
 
     PATH = "./pre_trained/dncnn.pth"
     torch.save(net.state_dict(), PATH)
+
+    return losses, img_list
